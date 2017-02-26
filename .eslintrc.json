@@ -1,0 +1,23 @@
+{
+  "extends": "google",
+  "installedESLint": true,
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedStrict": true
+    }
+  },
+  "rules": {
+    "indent": ["error", 2, {
+      "SwitchCase": 1,
+      "VariableDeclarator": 1
+    }],
+    "max-len": "error",
+    "no-multiple-empty-lines": ["error", {"max": 1}]
+  }
+}

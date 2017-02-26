@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "PageChecker",
+  "version": "0.0.1",
+  "author": "Tiso Alvarez Puccinelli",
+  "description": "A WebExtension that checks web pages for errors and standards compliance.",
+  "icons": {
+    "48": "./images/icons/icon48.png",
+    "96": "./images/icons/icon96.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [],
+  "applications": {
+    "gecko": {
+      "strict_min_version": "51.0"
+    }
+  }
+}
