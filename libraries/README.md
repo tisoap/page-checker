@@ -1,1 +1,1 @@
-This folder holds 3rd party libraries used by the extension.
+This folder holds 3rd party JS libraries used by the extension.

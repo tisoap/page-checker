@@ -1,15 +1,43 @@
 {
   "manifest_version": 2,
-  "name": "PageChecker",
+  "name": "Page Checker",
   "version": "0.0.1",
   "author": "Tiso Alvarez Puccinelli",
   "description": "A WebExtension that checks web pages for errors and standards compliance.",
+  "homepage_url": "https://github.com/tisoalvarez/page-checker",
   "icons": {
     "48": "./images/icons/icon48.png",
     "96": "./images/icons/icon96.png"
   },
   "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
     "storage"
   ],
-  "content_scripts": []
+  "browser_action": {
+    "default_icon": {
+      "48": "./images/icons/icon48.png",
+      "96": "./images/icons/icon96.png"
+    },
+    "default_title": "Page Checker",
+    "default_popup": "./pages/popup.html"
+  },
+  "options_ui": {
+    "page": "./pages/options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["./source/content/content.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["./source/background/background.js"],
+    "page": "./pages/background.html"
+  },
+  "web_accessible_resources": [
+    "./images/icons/icon48.png"
+  ]
 }
