@@ -1,0 +1,24 @@
+{
+  "name": "PageChecker",
+  "description": "A WebExtension that checks web pages for errors and standards compliance.",
+  "main": [
+    "source/background/background.js",
+    "source/content/content.js"
+  ],
+  "authors": [
+    "Tiso Alvarez Puccinelli"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/tisoalvarez/page-checker",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "build",
+    "distribution"
+  ],
+  "dependencies": {
+    "less-space": "^1.1.1"
+  }
+}

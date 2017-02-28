@@ -1,14 +1,58 @@
-// TODO
+// Modified version of LESS SPACE
+// (https://github.com/Eomerx/less-space)
 
-.pb0 {
-  padding-bottom: 0;
+$space-values: (
+  0,
+  5,
+  10,
+  15,
+  20,
+  30,
+  40,
+  50
+) !default;
+
+$space-prefixes: (
+  p: padding,
+  pt: padding-top,
+  pr: padding-right,
+  pb: padding-bottom,
+  pl: padding-left,
+  m: margin,
+  mt: margin-top,
+  mr: margin-right,
+  mb: margin-bottom,
+  ml: margin-left,
+) !default;
+
+$breakpoints: (
+  s: 0,
+  m: 600px,
+  l: 992px
+) !default;
+
+@mixin make-space($values, $prefixes, $breakpoints) {
+  @each $breakpoint-name, $breakpoint-value in $breakpoints {
+    @if($breakpoint-value == 0) {
+      @each $attr-short, $attr-long in $prefixes {
+        @each $value in $values {
+          .#{$breakpoint-name}-#{$attr-short}-#{$value} {
+            #{$attr-long}: #{$value}#{'px !important'};
+          }
+        }
+      }
+    } @else {
+      @media screen and (min-width: $breakpoint-value) {
+        @each $attr-short, $attr-long in $prefixes {
+          @each $value in $values {
+            .#{$breakpoint-name}-#{$attr-short}-#{$value} {
+              #{$attr-long}: #{$value}#{'px !important'};
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
-.mb0 {
-  margin-bottom: 0;
-}
-
-.no-spacing {
-  margin: 0;
-  padding: 0;
-}
+@include make-space($space-values, $space-prefixes, $breakpoints);

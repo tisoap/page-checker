@@ -4,6 +4,7 @@ The MIT License (MIT)
 
 applies to:
 - Materialize, Copyright (c) 2014-2017 Materialize
+- LESS SPACE, Copyright (c) 2015 Ömer Aslanbakan
 
 ------------------------------------------------------------------------
 
