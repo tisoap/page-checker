@@ -1,6 +1,7 @@
 // Node modules
 const gulp = require('gulp');
 const del = require('del');
+const sass = require('gulp-sass');
 
 /**
  * Build extension for all browsers.
@@ -28,10 +29,19 @@ gulp.task('copy-chrome', ['copy-browser'], () => {
 /**
  * Copy common build files to browser specific folders.
  */
-gulp.task('copy-browser', ['copy-common'], () => {
+gulp.task('copy-browser', ['copy-common', 'compile-sass'], () => {
   return gulp.src(['build/common/**/*'])
     .pipe(gulp.dest('build/firefox/'))
     .pipe(gulp.dest('build/chrome/'));
+});
+
+/**
+ * Compiles Sass into CSS.
+ */
+gulp.task('compile-sass', ['copy-styles'], () => {
+  return gulp.src('styles/sass/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('build/common/styles/'));
 });
 
 /**
@@ -50,7 +60,7 @@ gulp.task('copy-common', [
  * Copy CSS styles folder to build folder, but skip Markdown files.
  */
 gulp.task('copy-styles', ['build-clean'], () => {
-  return gulp.src(['styles/**/*', '!styles/**/*.md'])
+  return gulp.src(['styles/css/**/*'])
     .pipe(gulp.dest('build/common/styles/'));
 });
 
