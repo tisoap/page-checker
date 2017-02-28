@@ -34,8 +34,7 @@
     }
   ],
   "background": {
-    "scripts": ["./source/background/background.js"],
-    "page": "./pages/background.html"
+    "scripts": ["./source/background/background.js"]
   },
   "web_accessible_resources": [
     "./images/icons/icon48.png"

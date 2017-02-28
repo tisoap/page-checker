@@ -3,12 +3,43 @@ const gulp = require('gulp');
 const del = require('del');
 
 /**
- * Runs all tasks;
+ * Build extension for all browsers.
  */
-gulp.task('default', [
+gulp.task('default', ['copy-firefox', 'copy-chrome'], () => {
+  return;
+});
+
+/**
+ * Copy firefox specific files.
+ */
+gulp.task('copy-firefox', ['copy-browser'], () => {
+  return gulp.src(['vendor/firefox/manifest.json'])
+    .pipe(gulp.dest('build/firefox/'));
+});
+
+/**
+ * Copy chrome specific files.
+ */
+gulp.task('copy-chrome', ['copy-browser'], () => {
+  return gulp.src(['vendor/chrome/manifest.json'])
+    .pipe(gulp.dest('build/chrome/'));
+});
+
+/**
+ * Copy common build files to browser specific folders.
+ */
+gulp.task('copy-browser', ['copy-common'], () => {
+  return gulp.src(['build/common/**/*'])
+    .pipe(gulp.dest('build/firefox/'))
+    .pipe(gulp.dest('build/chrome/'));
+});
+
+/**
+ * Builds all files folders that are common to all browsers.
+ */
+gulp.task('copy-common', [
   'copy-source',
   'copy-styles',
-  'copy-manifest',
   'copy-images',
   'copy-pages',
 ], () => {
@@ -20,7 +51,7 @@ gulp.task('default', [
  */
 gulp.task('copy-styles', ['build-clean'], () => {
   return gulp.src(['styles/**/*', '!styles/**/*.md'])
-    .pipe(gulp.dest('build/styles/'));
+    .pipe(gulp.dest('build/common/styles/'));
 });
 
 /**
@@ -28,7 +59,7 @@ gulp.task('copy-styles', ['build-clean'], () => {
  */
 gulp.task('copy-pages', ['build-clean'], () => {
   return gulp.src(['pages/**/*', '!pages/**/*.md'])
-    .pipe(gulp.dest('build/pages/'));
+    .pipe(gulp.dest('build/common/pages/'));
 });
 
 /**
@@ -36,15 +67,7 @@ gulp.task('copy-pages', ['build-clean'], () => {
  */
 gulp.task('copy-source', ['build-clean'], () => {
   return gulp.src(['source/**/*', '!source/**/*.md'])
-    .pipe(gulp.dest('build/source/'));
-});
-
-/**
- * Copy the manifest file.
- */
-gulp.task('copy-manifest', ['build-clean'], () => {
-  return gulp.src(['vendor/firefox/manifest.json'])
-    .pipe(gulp.dest('build/'));
+    .pipe(gulp.dest('build/common/source/'));
 });
 
 /**
@@ -52,7 +75,7 @@ gulp.task('copy-manifest', ['build-clean'], () => {
  */
 gulp.task('copy-images', ['build-clean'], () => {
   return gulp.src(['images/**/*', '!images/**/*.md'])
-    .pipe(gulp.dest('build/images/'));
+    .pipe(gulp.dest('build/common/images/'));
 });
 
 /**
