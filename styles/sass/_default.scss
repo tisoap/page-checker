@@ -1,5 +1,6 @@
-// Default style that is common to all pages used by the extension.
+@import 'node_modules/materialize-css/sass/materialize';
+@import 'spacing';
 
 body {
-  padding: 2rem;
+  padding: 1rem;
 }

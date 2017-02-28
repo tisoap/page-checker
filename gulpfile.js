@@ -38,9 +38,9 @@ gulp.task('copy-browser', ['copy-common', 'compile-sass'], () => {
 /**
  * Compiles Sass into CSS.
  */
-gulp.task('compile-sass', ['copy-styles'], () => {
+gulp.task('compile-sass', () => {
   return gulp.src('styles/sass/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass())
     .pipe(gulp.dest('build/common/styles/'));
 });
 
@@ -49,19 +49,19 @@ gulp.task('compile-sass', ['copy-styles'], () => {
  */
 gulp.task('copy-common', [
   'copy-source',
-  'copy-styles',
   'copy-images',
   'copy-pages',
+  'copy-fonts',
 ], () => {
   return;
 });
 
 /**
- * Copy CSS styles folder to build folder, but skip Markdown files.
+ * Copy fonts folder to build folder, but skip Markdown files.
  */
-gulp.task('copy-styles', ['build-clean'], () => {
-  return gulp.src(['styles/css/**/*'])
-    .pipe(gulp.dest('build/common/styles/'));
+gulp.task('copy-fonts', ['build-clean'], () => {
+  return gulp.src(['fonts/**/*', '!fonts/**/*.md'])
+    .pipe(gulp.dest('build/common/fonts/'));
 });
 
 /**
