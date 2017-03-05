@@ -30,14 +30,16 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["./source/content/content.js"]
+      "js": [
+        "./source/content.js"
+      ]
     }
   ],
   "background": {
-    "scripts": ["./source/background/background.js"],
+    "scripts": [
+      "./source/background.js"
+    ],
     "persistent": false
   },
-  "web_accessible_resources": [
-    "./images/icons/icon48.png"
-  ]
+  "web_accessible_resources": []
 }

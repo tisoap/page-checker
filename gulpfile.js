@@ -14,7 +14,7 @@ gulp.task('default', ['copy-firefox', 'copy-chrome'], () => {
  * Copy firefox specific files.
  */
 gulp.task('copy-firefox', ['copy-browser'], () => {
-  return gulp.src(['vendor/firefox/manifest.json'])
+  return gulp.src(['vendor/firefox/**/*'])
     .pipe(gulp.dest('build/firefox/'));
 });
 
@@ -22,7 +22,7 @@ gulp.task('copy-firefox', ['copy-browser'], () => {
  * Copy chrome specific files.
  */
 gulp.task('copy-chrome', ['copy-browser'], () => {
-  return gulp.src(['vendor/chrome/manifest.json'])
+  return gulp.src(['vendor/chrome/**/*'])
     .pipe(gulp.dest('build/chrome/'));
 });
 
@@ -70,6 +70,14 @@ gulp.task('copy-fonts', ['build-clean'], () => {
 gulp.task('copy-pages', ['build-clean'], () => {
   return gulp.src(['pages/**/*', '!pages/**/*.md'])
     .pipe(gulp.dest('build/common/pages/'));
+});
+
+/**
+ * Copy JS library folder to build folder, but skip Markdown files.
+ */
+gulp.task('copy-libraries', ['build-clean'], () => {
+  return gulp.src(['libraries/**/*', '!libraries/**/*.md'])
+    .pipe(gulp.dest('build/common/libraries/'));
 });
 
 /**

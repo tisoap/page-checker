@@ -17,7 +17,7 @@
       "SwitchCase": 1,
       "VariableDeclarator": 1
     }],
-    "max-len": "error",
+    "max-len": ["error", 80],
     "no-multiple-empty-lines": ["error", {"max": 1}]
   }
 }
