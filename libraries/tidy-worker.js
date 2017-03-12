@@ -2,10 +2,13 @@
  * Web Worker functions for the tidy-html5 library. This
  * file will be concatenated at the end of the JavaScript
  * compiled Tidy.
+ *
+ * The tidy-html5 library version 0.1.1 is based
+ * on HTACG HTML Tidy version 5.1.36 (2016.02.01).
  */
 
 /**
- * Configuration for the Tidy script. For more info view:
+ * Configuration for the Tidy script. For more info see:
  * http://tidy.sourceforge.net/docs/quickref.html
  *
  * @type {Object}
@@ -19,6 +22,7 @@ tidyConfig = {
 
 /**
  * Handles postMessage() calls from other scripts.
+ *
  * @param {object} message
  */
 onmessage = function(message) {
