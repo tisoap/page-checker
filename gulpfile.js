@@ -2,6 +2,7 @@
 const gulp = require('gulp');
 const del = require('del');
 const sass = require('gulp-sass');
+const concat = require('gulp-concat');
 
 /**
  * Build extension for all browsers.
@@ -29,7 +30,7 @@ gulp.task('copy-chrome', ['copy-browser'], () => {
 /**
  * Copy common build files to browser specific folders.
  */
-gulp.task('copy-browser', ['copy-common', 'compile-sass'], () => {
+gulp.task('copy-browser', ['copy-common', 'compile-sass', 'pack-tidy'], () => {
   return gulp.src(['build/common/**/*'])
     .pipe(gulp.dest('build/firefox/'))
     .pipe(gulp.dest('build/chrome/'));
@@ -38,10 +39,21 @@ gulp.task('copy-browser', ['copy-common', 'compile-sass'], () => {
 /**
  * Compiles Sass into CSS.
  */
-gulp.task('compile-sass', () => {
+gulp.task('compile-sass', ['build-clean'], () => {
   return gulp.src('styles/sass/**/*.scss')
     .pipe(sass())
     .pipe(gulp.dest('build/common/styles/'));
+});
+
+/**
+ * Packs the HTML5 Tidy library into a single, web worker ready file.
+ */
+gulp.task('pack-tidy', ['build-clean'], () => {
+  return gulp.src([
+    'node_modules/tidy-html5/tidy.js',
+    'libraries/tidy-worker.js'])
+    .pipe(concat('tidy-worker.js'))
+    .pipe(gulp.dest('build/common/libraries/'));
 });
 
 /**
@@ -70,14 +82,6 @@ gulp.task('copy-fonts', ['build-clean'], () => {
 gulp.task('copy-pages', ['build-clean'], () => {
   return gulp.src(['pages/**/*', '!pages/**/*.md'])
     .pipe(gulp.dest('build/common/pages/'));
-});
-
-/**
- * Copy JS library folder to build folder, but skip Markdown files.
- */
-gulp.task('copy-libraries', ['build-clean'], () => {
-  return gulp.src(['libraries/**/*', '!libraries/**/*.md'])
-    .pipe(gulp.dest('build/common/libraries/'));
 });
 
 /**

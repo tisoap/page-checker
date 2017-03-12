@@ -34,7 +34,9 @@
     }
   ],
   "background": {
-    "scripts": ["./source/background.js"]
+    "scripts": [
+      "./source/background.js"
+    ]
   },
   "web_accessible_resources": [],
   "applications": {

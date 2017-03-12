@@ -1,5 +1,6 @@
 {
   "name": "PageChecker",
+  "productName": "Page Checker",
   "version": "0.0.1",
   "description": "A WebExtension that checks web pages for errors and standards compliance.",
   "author": "Tiso Alvarez Puccinelli",
@@ -8,11 +9,14 @@
     "url": "https://github.com/tisoalvarez/page-checker.git"
   },
   "license": "MIT",
+  "main": "source/background.js",
   "devDependencies": {
     "del": "^2.2.2",
+    "eslint": "^3.17.1",
+    "eslint-config-google": "^0.7.1",
     "gulp": "^3.9.1",
-    "gulp-sass": "^3.1.0",
-    "node-sass": "^4.5.0"
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^3.1.0"
   },
   "dependencies": {
     "materialize-css": "^0.98.0",

@@ -1,5 +1,3 @@
-// const tidy = require('tidy-html5').tidy_html5;
-
 chrome.runtime.onMessage.addListener(handleMessage);
 
 /**
@@ -16,27 +14,28 @@ chrome.runtime.onMessage.addListener(handleMessage);
  *        any JSON-ifiable object. This argument is passed back to the
  *        message sender.
  *
- * @return {[type]} [description]
+ * @return {boolean} True.
  */
 function handleMessage(message, sender, sendResponse) {
   switch(message.action) {
     case 'tidy':
-      let tidyResult = runTidy();
-      sendResponse(tidyResult);
+      console.log('Background: received tidy request.');
+      runTidy();
+      console.log('Background: executing tidy, returning answer.');
+      sendResponse('Asynchronously processing tidy.');
       break;
   }
   return true;
 }
 
 /**
- * Runs HTML Tidy on the current tab.
- *
- * @return {object} The result of the Tidy operation.
+ * Runs Tidy in a separate process.
  */
 function runTidy() {
-  // TODO
-  let result = {
-    response: 'Tidy successful.',
+  let tidyWorker = new Worker('../libraries/tidy-worker.js');
+  tidyWorker.onmessage = function(message) {
+    console.log(
+      `Background: Tidy finished processing with message: ${message.data}`);
   };
-  return result;
+  tidyWorker.postMessage('tidy');
 };

@@ -1,5 +1,5 @@
 /**
- * Once the pop-up has loaded, run popUpInit().
+ * Once the pop-up page has loaded, run popUpInit().
  */
 window.addEventListener('load', (event) => {
   popUpInit();
@@ -19,7 +19,7 @@ function popUpInit() {
  * background script asking it to perform the 'tidy' action.
  */
 function validate() {
-  console.log('Sending tidy request to background.');
+  console.log('Popup: Sending tidy request to background.');
   chrome.runtime.sendMessage({
     action: 'tidy',
   }, handleTidyResponse);
@@ -31,5 +31,5 @@ function validate() {
  *        JSON message from the background script.
  */
 function handleTidyResponse(message) {
-  console.log(`Message from the background script:  ${message.response}`);
+  console.log(`Popup: Message from background:\n${message}`);
 }

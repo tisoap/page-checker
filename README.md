@@ -2,6 +2,15 @@
 
 A WebExtension that checks web pages for errors and standards compliance.
 
+## Build
+
+After cloning this repository, run the following commands to have a working environment and build the extension:
+
+```shell
+$ sudo npm install -g gulp-cli
+$ npm install
+$ gulp
+```
 
 ## Copyright and license
 
