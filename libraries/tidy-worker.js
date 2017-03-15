@@ -27,11 +27,11 @@ tidyConfig = {
  */
 onmessage = function(message) {
   console.log('Tidy worker: Message received.');
-  if (message.data === 'tidy') {
+  if (message.data.action === 'tidy') {
     // TODO get the current page source HTML
     // TODO wrap console.log() calls from tidy library to a more useful function
     tidy_html5('<h1>I <3 bad markup</h2>', tidyConfig);
-    postMessage('Tidy success!\n');
+    postMessage('Tidy success! I received the page:\n' + message.data.page);
   } else {
     postMessage('Tidy error!');
   }

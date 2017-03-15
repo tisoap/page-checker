@@ -20,7 +20,7 @@ function handleMessage(message, sender, sendResponse) {
   switch(message.action) {
     case 'tidy':
       console.log('Background: received tidy request.');
-      runTidy();
+      runTidy(message);
       console.log('Background: executing tidy, returning answer.');
       sendResponse('Asynchronously processing tidy.');
       break;
@@ -30,12 +30,17 @@ function handleMessage(message, sender, sendResponse) {
 
 /**
  * Runs Tidy in a separate process.
+ * @param  {Object} data JSON with data to be sent to the Tidy worker.
  */
-function runTidy() {
+function runTidy(data) {
+  // Creates a new Web Worker
   let tidyWorker = new Worker('../libraries/tidy-worker.js');
+
+  // What should be done when the worker sends a message back
   tidyWorker.onmessage = function(message) {
     console.log(
       `Background: Tidy finished processing with message: ${message.data}`);
   };
-  tidyWorker.postMessage('tidy');
+
+  tidyWorker.postMessage(data);
 };

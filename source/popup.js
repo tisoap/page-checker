@@ -20,9 +20,17 @@ function popUpInit() {
  */
 function validate() {
   console.log('Popup: Sending tidy request to background.');
-  chrome.runtime.sendMessage({
-    action: 'tidy',
-  }, handleTidyResponse);
+
+  // Gets the current tab url and runs a callback function,
+  // passing the found url
+  getCurrentTabUrl(function(url) {
+    // Sends a JSON message to the background script with the
+    // action to be performed and the page.
+    chrome.runtime.sendMessage({
+      action: 'tidy',
+      page: url,
+    }, handleTidyResponse);
+  });
 }
 
 /**
@@ -32,4 +40,23 @@ function validate() {
  */
 function handleTidyResponse(message) {
   console.log(`Popup: Message from background:\n${message}`);
+}
+
+/**
+ * Get the current URL.
+ * TODO Separate in diferent file.
+ *
+ * @param {function(string)} callback - called when the URL of the current tab
+ *   is found.
+ */
+function getCurrentTabUrl(callback) {
+  let queryInfo = {
+    active: true,
+    currentWindow: true,
+  };
+  chrome.tabs.query(queryInfo, function(tabs) {
+    let tab = tabs[0];
+    let url = tab.url;
+    callback(url);
+  });
 }
